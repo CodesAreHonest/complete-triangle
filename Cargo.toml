@@ -1,0 +1,6 @@
+[package]
+name = "rust_project"
+version = "0.1.0"
+authors = ["Yinghua <yinghuachai0@gmail.com>"]
+
+[dependencies]
