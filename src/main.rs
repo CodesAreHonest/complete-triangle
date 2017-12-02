@@ -3,11 +3,29 @@ use std::io::Write;
 
 fn main() {
 
-    let (a, is_num) = obtain_input("a");
-    //    println!("The variable A is {} and is a number ({})", a, is_num);
+    loop {
+        let (a, is_a_int) = obtain_input("a");
 
-    let (b, is_num) = obtain_input("b");
-    let (c, is_num) = obtain_input("c");
+        if is_a_int == true {
+            break;
+        }
+    }
+
+    loop {
+        let (b, is_b_int) = obtain_input("b");
+
+        if is_b_int == true {
+            break;
+        }
+    }
+
+    loop {
+        let (c, is_c_int) = obtain_input("c");
+
+        if is_c_int == true {
+            break;
+        }
+    }
 
 }
 
