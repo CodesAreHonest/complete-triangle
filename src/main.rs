@@ -36,7 +36,7 @@ fn main() {
 
 }
 
-//fn num_of_possible_triangle(array: &mut [u32], length: u32) -> u32 {
+//fn num_of_possible_triangle(array: &mut [u64], length: u64) -> u64 {
 
 //		use std::cmp;
 //
@@ -64,7 +64,7 @@ fn main() {
 
 
 // function use to determine whether the inputs can form valid triangle
-fn form_triangle(a: u32, b: u32, c: u32) -> bool {
+fn form_triangle(a: u64, b: u64, c: u64) -> bool {
     println!("a = {}, b = {}, c = {}", a, b, c);
 
     if a + b > c && b + c > a && c + a > b {
@@ -80,7 +80,7 @@ fn form_triangle(a: u32, b: u32, c: u32) -> bool {
 *		2. Isosceles (two sides are equal)
 *		3. Equilateral (all three sides are equal)
 */
-fn classify_triangle(a: u32, b: u32, c: u32) -> u32 {
+fn classify_triangle(a: u64, b: u64, c: u64) -> u64 {
 
     let equilateral_count = equilateral(a, b, c);
     let scalene_count = scalene(a, b, c);
@@ -95,9 +95,9 @@ fn classify_triangle(a: u32, b: u32, c: u32) -> u32 {
 }
 
 // the function determine whether the triangle is isosceles
-fn isosceles(a: u32, b: u32, c: u32) -> u32 {
+fn isosceles(a: u64, b: u64, c: u64) -> u64 {
 
-    let mut count: u32 = 0;
+    let mut count: u64 = 0;
 
     if (a == b && a != c && b != c) || (a == c && a != b && b != c) ||
         (b == c && a != b && a != c)
@@ -111,9 +111,9 @@ fn isosceles(a: u32, b: u32, c: u32) -> u32 {
 }
 
 // the function determine whether the triangle is equilateral
-fn equilateral(a: u32, b: u32, c: u32) -> u32 {
+fn equilateral(a: u64, b: u64, c: u64) -> u64 {
 
-    let mut count: u32 = 0;
+    let mut count: u64 = 0;
 
     if a == b && b == c && c == a {
         count = count + 1;
@@ -124,9 +124,9 @@ fn equilateral(a: u32, b: u32, c: u32) -> u32 {
 }
 
 // the function determine whether the triangle is Scalene
-fn scalene(a: u32, b: u32, c: u32) -> u32 {
+fn scalene(a: u64, b: u64, c: u64) -> u64 {
 
-    let mut count: u32 = 0;
+    let mut count: u64 = 0;
 
     if a != b && b != c && c != a {
         count = count + 1;
@@ -137,7 +137,7 @@ fn scalene(a: u32, b: u32, c: u32) -> u32 {
 }
 
 // the function check whether the input is number or string, then return number
-fn obtain_input(var: &str) -> u32 {
+fn obtain_input(var: &str) -> u64 {
 
     loop {
         print!("Input number for variable {} -> ", var);
@@ -154,12 +154,12 @@ fn obtain_input(var: &str) -> u32 {
         let is_num = trimmed_input.parse::<u64>().is_ok();
 
         // display the message to check whether the inputs are numerical
-        match trimmed_input.parse::<u32>() {	
+        match trimmed_input.parse::<u64>() {	
             Ok(..) => println!("The input ({}) is a integer. ", trimmed_input),
             Err(..) => println!("The input ({}) is not a integer. ", trimmed_input),
         };
 
-        let input: u32;
+        let input: u64;
 
         // check whether the input is number, convert string to integer if its number
         if is_num == true {
@@ -185,7 +185,7 @@ fn obtain_input(var: &str) -> u32 {
 }
 
 // determine whether the triangle are acute, right and obtuse triangle
-fn pythagorean_theorem(a: u32, b: u32, c: u32) {
+fn pythagorean_theorem(a: u64, b: u64, c: u64) {
 
     if (a * a) * (b * b) == (c * c) {
         println!("The triangle is Right triangle.");
