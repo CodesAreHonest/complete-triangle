@@ -10,6 +10,12 @@ fn main() {
     let bln_valid_triangle = form_triangle(a, b, c);
     println!("Validity of forming triangle ({})", bln_valid_triangle);
 
+    let triangle_count = classify_triangle(a, b, c);
+    println!(
+        "The number of triangle can be generated are {}",
+        triangle_count
+    );
+
 }
 
 fn form_triangle(a: u64, b: u64, c: u64) -> bool {
@@ -22,14 +28,39 @@ fn form_triangle(a: u64, b: u64, c: u64) -> bool {
     }
 }
 
+/*
+* 	This function is use to classify the triangle whether there are:
+*		1. Scalene (all sides are different)
+*		2. Isosceles (two sides are equal)
+*		3. Equilateral (all three sides are equal)
+*/
+fn classify_triangle(a: u64, b: u64, c: u64) -> u64 {
+
+    let mut count: u64 = 0;
+
+
+    if a == b && b == c && c == a {
+        count = count + 1;
+        println!("The triangle is equilateral.");
+    } else if a != b && b != c && c != a {
+        count = count + 1;
+        println!("The triangle is Scalene.");
+    } else if (a == b && a != c && b != c) || (a == c && a != b && b != c) ||
+               (b == c && a != b && a != c)
+    {
+        count = count + 1;
+        println!("The triangle is Isosceles.");
+    }
+
+    return count;
+
+}
+
 // the function check whether the input is number or string, then return number
 fn obtain_input(var: &str) -> u64 {
 
     loop {
-        print!(
-            "Input number for variable {} (between 1 to 1000000) -> ",
-            var
-        );
+        print!("Input number for variable {} -> ", var);
 
         // add flush() to prevent frequently line-buffered
         io::stdout().flush().unwrap();
