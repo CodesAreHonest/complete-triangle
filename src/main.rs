@@ -34,7 +34,6 @@ fn main() {
     }
 
 
-
 }
 
 //fn num_of_possible_triangle(array: &mut [u32], length: u32) -> u32 {
@@ -155,7 +154,7 @@ fn obtain_input(var: &str) -> u32 {
         let is_num = trimmed_input.parse::<u64>().is_ok();
 
         // display the message to check whether the inputs are numerical
-        match trimmed_input.parse::<u64>() {	
+        match trimmed_input.parse::<u32>() {	
             Ok(..) => println!("The input ({}) is a integer. ", trimmed_input),
             Err(..) => println!("The input ({}) is not a integer. ", trimmed_input),
         };
