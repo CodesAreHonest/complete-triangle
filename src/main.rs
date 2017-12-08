@@ -187,11 +187,23 @@ fn obtain_input(var: &str) -> u64 {
 // determine whether the triangle are acute, right and obtuse triangle
 fn pythagorean_theorem(a: u64, b: u64, c: u64) {
 
-    if (a * a) * (b * b) == (c * c) {
+    let a_square = a * a;
+    let b_square = b * b;
+    let c_square = c * c;
+
+    println!(
+        "The square of A = {}, B = {}, C = {}",
+        a_square,
+        b_square,
+        c_square
+    );
+
+
+    if a_square + b_square == c_square {
         println!("The triangle is Right triangle.");
-    } else if (a * a) * (b * b) > (c * c) {
+    } else if a_square + b_square > c_square {
         println!("The triangle is Acute triangle.");
-    } else if (a * a) * (b * b) < (c * c) {
+    } else if a_square + b_square < c_square {
         println!("The triangle is Obtuse triangle.");
     }
 }
