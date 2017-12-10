@@ -1,6 +1,6 @@
 Complete Triangle
 ==================
-> Program that determine triangle types or classifications and number of possible triangles generated with three inputs provided by user. 
+> Program that determine **triangle types** and **number of possible number of triangles** can be generated with three inputs provided by user. 
 
 *** 
 
@@ -22,7 +22,7 @@ Table Of Content
 
 Introduction
 ============
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Triangles can be classified by various properties and characteristic relating to their angles and sides. A triangle has three sides and three angles and these angles always add to 180°.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Triangles can be classified by various properties and characteristic relating to their **angles and sides**. A triangle has **three sides and three angles** and these angles always add to **180°**.  
 
 The type of triangle can be classify whether there are:  
 1. Scalene (all sides are different)  
@@ -33,6 +33,8 @@ Pythagorean Theorem can be used to determine whether the triangle is:
 1. Right Angle  (a^2 * b^2 = c^2) 
 2. Acute Angle  (a^2 * b^2 > c^2)
 3. Obtuse Angle (a^2 * b^2 < c^2)  
+
+*** 
 
 Infrastructure Setup and Installation
 =====================================
