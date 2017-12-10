@@ -38,17 +38,19 @@ Pythagorean Theorem can be used to determine whether the triangle is:
 
 Infrastructure Setup and Installation
 =====================================
-1. Clone the sourcecode from Git: 
+1. Download and install Rust compiler according to [official Rust documentation](https://www.rust-lang.org/en-US/install.html).  
+
+2. Clone the sourcecode from Git: 
 ``` sh 
 $ git clone https://github.com/CodesAreHonest/complete-triangle.git
 ``` 
 
-2. Change directory to the cloned repository: 
+3. Change directory to the cloned repository: 
 ``` sh 
 $ cd complete-triangle
 ```
 
-3. Compile and run the sourcecode with Cargo: 
+4. Compile and run the sourcecode with Cargo: 
 ``` sh 
 $ cargo build 
    Compiling complete-triangle v0.1.0 (file:<directory>)
@@ -59,7 +61,7 @@ $ cargo run
 Input number for variable a -> 
 ``` 
 
-4. The program is running when it required to user to input number for three variables. The program only accepts integer as input in order to determine whether the three variables obtain are valid to form a triangle. 
+5. The program is running when it required to user to input number for three variables. The program only accepts integer as input in order to determine whether the three variables obtain are valid to form a triangle. 
 
 
 Highlight
@@ -70,6 +72,7 @@ Software Resources
 2. Git  
 3. GDB Debugger  
 4. Eclipse for Parallel Application Developers IDE  
+5. Rust Compiler 1.20.0 
 
 Screenshot
 ----------
