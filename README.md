@@ -11,12 +11,12 @@ Table Of Content
 * [Table Of Content](#table-of-content) 
 * [Introduction](#introduction)
 * [Infrastructure Setup and Installation](#infrastructure-setup-and-installation)
-* [Highlight]
+* [Highlight](#highlight)
   * [Software Resources](#software-resources)
   * [Screenshot](#screenshot)
-* [About]
-  * [Contributor]
-  * [Status] 
+* [About](#about)
+  * [Contributor](#contributor)
+  * [Status](#status)
   
 *** 
 
