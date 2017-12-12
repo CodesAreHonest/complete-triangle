@@ -1,6 +1,6 @@
 Complete Triangle
 ==================
-> Program that determine **triangle types** and **number of possible number of triangles** can be generated with three inputs provided by user. 
+> Program that determine **triangle types** and **number of possible triangles** can be generated with three inputs provided by user. 
 
 *** 
 
