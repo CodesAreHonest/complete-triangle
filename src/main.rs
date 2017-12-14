@@ -1,9 +1,14 @@
 use std::io;
 use std::io::Write;
 use std::thread;
+use std::time::Duration;
 
 // multiple producer, single consumer.
 use std::sync::mpsc;
+
+// use time crate
+extern crate time;
+use time::PreciseTime;
 
 
 fn main() {
@@ -18,56 +23,20 @@ fn main() {
 
     if bln_valid_triangle == true {
 
-        concurrency_classify(a, b, c);
-        //        let triangle_count = classify_triangle(a, b, c);
-        //        println!(
-        //            "The number of triangle can be generated are {}",
-        //            triangle_count
-        //        );
+        let sequential_count = classify_triangle(a, b, c);
+        println!(
+            "The number of triangle can be generated are {} (Sequential)",
+            sequential_count
+        );
+
+        let concurrent_count = concurrency_classify(a, b, c);
+        println!(
+            "The number of triangle can be generated are {} (Multi-Channel)",
+            concurrent_count
+        );
     }
 
-
-    //    let mut triangle_array = [a, b, c];
-    //    let triangle_count = num_of_possible_triangle(&mut triangle_array, 3);
-    //    println!(
-    //        "The number of possible triangle count are {}",
-    //        triangle_count
-    //    );
-
-
-
-
-
-
-
 }
-
-//fn num_of_possible_triangle(array: &mut [u64], length: u64) -> u64 {
-
-//		use std::cmp;
-//
-//    array.sort();
-//    println!("The array of triangle are {:?}", array);
-//
-//    let mut count = 0; // i32
-//
-//    for i in 0..length {
-//
-//        let mut k = length - 1;
-//
-//        for j in i + 1..length {
-//
-//            while k < j && array[k as usize] > array[i as usize] + array[j as usize] {
-//                k = k - 1;
-//            }
-//
-//            count += cmp::max(k - j, 0);
-//        }
-//    }
-//
-//    return count;
-//}
-
 
 // function use to determine whether the inputs can form valid triangle
 fn form_triangle(a: u64, b: u64, c: u64) -> bool {
@@ -80,7 +49,9 @@ fn form_triangle(a: u64, b: u64, c: u64) -> bool {
     }
 }
 
-fn concurrency_classify(a: u64, b: u64, c: u64) {
+fn concurrency_classify(a: u64, b: u64, c: u64) -> u64 {
+
+    let start = PreciseTime::now();
 
     // transmitter and receiver over the channel
     let (equilateral_tx, equilateral_rx) = mpsc::channel();
@@ -107,7 +78,18 @@ fn concurrency_classify(a: u64, b: u64, c: u64) {
     let isosceles_receive = isosceles_rx.recv().unwrap();
 
     let count = equilateral_receive + scalene_receive + isosceles_receive;
-    println!("Got: {}", count);
+
+    pythagorean_theorem(a, b, c);
+    let end = PreciseTime::now();
+
+
+
+    println!(
+        "{} seconds on classify triangle concurrently. ",
+        start.to(end)
+    );
+
+    return count;
 }
 
 /*
@@ -118,12 +100,23 @@ fn concurrency_classify(a: u64, b: u64, c: u64) {
 */
 fn classify_triangle(a: u64, b: u64, c: u64) -> u64 {
 
+    let start = PreciseTime::now();
+
     let equilateral_count = equilateral(a, b, c);
     let scalene_count = scalene(a, b, c);
     let isosceles_count = isosceles(a, b, c);
     let count = equilateral_count + scalene_count + isosceles_count;
 
     pythagorean_theorem(a, b, c);
+
+    let end = PreciseTime::now();
+
+    println!(
+        "{} seconds on classify triangle sequentially. ",
+        start.to(end)
+    );
+
+
 
 
     return count;
@@ -133,6 +126,7 @@ fn classify_triangle(a: u64, b: u64, c: u64) -> u64 {
 // the function determine whether the triangle is isosceles
 fn isosceles(a: u64, b: u64, c: u64) -> u64 {
 
+    thread::sleep(Duration::from_secs(2));
     let mut count: u64 = 0;
 
     if (a == b && a != c && b != c) || (a == c && a != b && b != c) ||
@@ -149,6 +143,7 @@ fn isosceles(a: u64, b: u64, c: u64) -> u64 {
 // the function determine whether the triangle is equilateral
 fn equilateral(a: u64, b: u64, c: u64) -> u64 {
 
+    thread::sleep(Duration::from_secs(2));
     let mut count: u64 = 0;
 
     if a == b && b == c && c == a {
@@ -162,6 +157,7 @@ fn equilateral(a: u64, b: u64, c: u64) -> u64 {
 // the function determine whether the triangle is Scalene
 fn scalene(a: u64, b: u64, c: u64) -> u64 {
 
+    thread::sleep(Duration::from_secs(2));
     let mut count: u64 = 0;
 
     if a != b && b != c && c != a {
