@@ -1,37 +1,43 @@
 use std::io;
 use std::io::Write;
+use std::thread;
+
+// multiple producer, single consumer.
+use std::sync::mpsc;
 
 
 fn main() {
 
-    loop {
-        let a = obtain_input("a");
-        let b = obtain_input("b");
-        let c = obtain_input("c");
 
-        let bln_valid_triangle = form_triangle(a, b, c);
-        println!("Validity of forming triangle ({})", bln_valid_triangle);
+    let a = obtain_input("a");
+    let b = obtain_input("b");
+    let c = obtain_input("c");
 
-        if bln_valid_triangle == true {
-            let triangle_count = classify_triangle(a, b, c);
-            println!(
-                "The number of triangle can be generated are {}",
-                triangle_count
-            );
-        }
+    let bln_valid_triangle = form_triangle(a, b, c);
+    println!("Validity of forming triangle ({})", bln_valid_triangle);
 
+    if bln_valid_triangle == true {
 
-        //    let mut triangle_array = [a, b, c];
-        //    let triangle_count = num_of_possible_triangle(&mut triangle_array, 3);
-        //    println!(
-        //        "The number of possible triangle count are {}",
-        //        triangle_count
-        //    );
-
-        println!();
-
-
+        concurrency_classify(a, b, c);
+        //        let triangle_count = classify_triangle(a, b, c);
+        //        println!(
+        //            "The number of triangle can be generated are {}",
+        //            triangle_count
+        //        );
     }
+
+
+    //    let mut triangle_array = [a, b, c];
+    //    let triangle_count = num_of_possible_triangle(&mut triangle_array, 3);
+    //    println!(
+    //        "The number of possible triangle count are {}",
+    //        triangle_count
+    //    );
+
+
+
+
+
 
 
 }
@@ -72,6 +78,36 @@ fn form_triangle(a: u64, b: u64, c: u64) -> bool {
     } else {
         return false;
     }
+}
+
+fn concurrency_classify(a: u64, b: u64, c: u64) {
+
+    // transmitter and receiver over the channel
+    let (equilateral_tx, equilateral_rx) = mpsc::channel();
+    let (scalene_tx, scalene_rx) = mpsc::channel();
+    let (isosceles_tx, isosceles_rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        let equilateral_count = equilateral(a, b, c);
+        equilateral_tx.send(equilateral_count).unwrap();
+    });
+
+    thread::spawn(move || {
+        let scalene_count = scalene(a, b, c);
+        scalene_tx.send(scalene_count).unwrap();
+    });
+
+    thread::spawn(move || {
+        let isosceles_count = isosceles(a, b, c);
+        isosceles_tx.send(isosceles_count).unwrap();
+    });
+
+    let equilateral_receive = equilateral_rx.recv().unwrap();
+    let scalene_receive = scalene_rx.recv().unwrap();
+    let isosceles_receive = isosceles_rx.recv().unwrap();
+
+    let count = equilateral_receive + scalene_receive + isosceles_receive;
+    println!("Got: {}", count);
 }
 
 /*
